@@ -1,33 +1,31 @@
 package com.seu.vo;
 
+import com.seu.po.IpSegment;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
-import java.util.HashMap;
+import java.util.TreeMap;
 
 import static com.seu.FormatCheckUtil.*;
 
 /**
  * @author <a href="https://github.com/shellqiqi">shellqiqi</a>
- * @since 2018/3/8 22:35
+ * @since 2018/3/9 19:45
  */
-public class IdList {
+public class IpList {
 
-    public HashMap<Integer, String> list = new HashMap<Integer, String>();
+    public TreeMap<IpSegment, Integer> list = new TreeMap<IpSegment, Integer>();
 
-    /**
-     * Constructor for ID list.
-     * @param filePath Filepath.
-     */
-    public IdList(String filePath) {
-        readFromFile(filePath);
+    public IpList() {
+
     }
 
     /**
-     * Read ID list from filepath.
-     * @param filePath Filepath.
+     * Read IP list from file path.
+     * @param filePath File path.
      */
-    private void readFromFile(String filePath) {
+    private void readFromFile(String filePath) { //TODO: test
         try {
             FileInputStream fileInputStream = new FileInputStream(filePath);
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream));
@@ -36,13 +34,12 @@ public class IdList {
             while ((line = bufferedReader.readLine()) != null) {
                 String[] splitLine = line.split(",");
 
-                Integer id = Integer.parseInt(splitLine[0]);
-                String name = splitLine[1];
+                IpSegment ipSegment = new IpSegment(splitLine[0], splitLine[1]);
+                Integer id = Integer.parseInt(splitLine[2]);
 
                 idFormatCheck(id);
-                nameFormatCheck(name);
 
-                list.put(id, name);
+                list.put(ipSegment, id);
             }
 
             fileInputStream.close();
@@ -50,7 +47,7 @@ public class IdList {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            System.out.println("Read ID file from \"" + filePath + '\"');
+            System.out.println("Read IP file from \"" + filePath + '\"');
         }
     }
 }
