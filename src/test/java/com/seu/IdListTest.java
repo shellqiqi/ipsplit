@@ -1,5 +1,6 @@
 package com.seu;
 
+import com.seu.VO.IdList;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

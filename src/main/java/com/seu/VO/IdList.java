@@ -1,4 +1,4 @@
-package com.seu;
+package com.seu.VO;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -9,7 +9,7 @@ import java.util.HashMap;
  * @author <a href="https://github.com/shellqiqi">shellqiqi</a>
  * @since 2018/3/8 22:35
  */
-public class IdList {
+public class IdList { //TODO: Remove check functions and map component
 
     public HashMap<Integer, String> list = new HashMap<Integer, String>();
 
