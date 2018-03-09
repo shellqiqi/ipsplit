@@ -1,6 +1,5 @@
 package com.seu;
 
-import java.math.BigDecimal;
 import java.math.BigInteger;
 
 /**
@@ -12,7 +11,7 @@ public class FormatCheckUtil {
     /**
      * Check the ID format is correct.
      * @param id Unsigned 16 bits integer.
-     * @throws Exception When ID is not a unsigned 16 bits integer.
+     * @throws Exception When ID is not an unsigned 16 bits integer.
      */
     public static void idFormatCheck(Integer id) throws Exception {
         if (id < 0 || id > 65535)
@@ -30,7 +29,11 @@ public class FormatCheckUtil {
             throw new Exception("Name Format Error - Name must be a string less than 255 characters.");
     }
 
-    //TODO: Test
+    /**
+     * Check the IP format is correct.
+     * @param ip Unsigned 32 bits integer.
+     * @throws Exception When IP is not an unsigned 32bits integer.
+     */
     public static void ipFormatCheck(BigInteger ip) throws Exception {
         if (ip.compareTo(new BigInteger("0")) < 0 || ip.compareTo(new BigInteger("4294967295")) > 0)
             throw new Exception("IP Format Error - IP must be a 32 bits unsigned integer.");
