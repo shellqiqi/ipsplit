@@ -7,27 +7,21 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.TreeMap;
 
-import static com.seu.FormatCheckUtil.*;
+public class SplitList {
 
-/**
- * @author <a href="https://github.com/shellqiqi">shellqiqi</a>
- * @since 2018/3/9 19:45
- */
-public class IpList {
-
-    public TreeMap<IpSegment, Integer> list = new TreeMap<IpSegment, Integer>();
+    public TreeMap<IpSegment, String> list = new TreeMap<>();
 
     /**
-     * Constructor for IP list.
+     * Constructor for split list.
      * @param filePath Filepath.
      */
-    public IpList(String filePath) {
+    public SplitList(String filePath) {
         readFromFile(filePath);
     }
 
     /**
-     * Read IP list from file path.
-     * @param filePath File path.
+     * Read split list from filepath.
+     * @param filePath Filepath.
      */
     private void readFromFile(String filePath) {
         try {
@@ -42,11 +36,8 @@ public class IpList {
                 long netEnd = Long.parseLong(splitLine[1]);
 
                 IpSegment ipSegment = new IpSegment(netBegin, netEnd);
-                Integer id = Integer.parseInt(splitLine[2]);
 
-                idFormatCheck(id);
-
-                list.put(ipSegment, id);
+                list.put(ipSegment, splitLine[2]);
             }
 
             fileInputStream.close();
