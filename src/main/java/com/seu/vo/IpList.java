@@ -17,15 +17,15 @@ public class IpList {
 
     public TreeMap<IpSegment, Integer> list = new TreeMap<IpSegment, Integer>();
 
-    public IpList() {
-
+    public IpList(String filePath) {
+        readFromFile(filePath);
     }
 
     /**
      * Read IP list from file path.
      * @param filePath File path.
      */
-    private void readFromFile(String filePath) { //TODO: test
+    private void readFromFile(String filePath) {
         try {
             FileInputStream fileInputStream = new FileInputStream(filePath);
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream));
@@ -34,7 +34,10 @@ public class IpList {
             while ((line = bufferedReader.readLine()) != null) {
                 String[] splitLine = line.split(",");
 
-                IpSegment ipSegment = new IpSegment(splitLine[0], splitLine[1]);
+                long netBegin = Long.parseLong(splitLine[0]);
+                long netEnd = Long.parseLong(splitLine[1]);
+
+                IpSegment ipSegment = new IpSegment(netBegin, netEnd);
                 Integer id = Integer.parseInt(splitLine[2]);
 
                 idFormatCheck(id);

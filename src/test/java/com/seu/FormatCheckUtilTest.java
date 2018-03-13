@@ -2,8 +2,6 @@ package com.seu;
 
 import org.junit.Test;
 
-import java.math.BigInteger;
-
 import static org.junit.Assert.*;
 
 import static com.seu.FormatCheckUtil.*;
@@ -44,16 +42,16 @@ public class FormatCheckUtilTest {
 
     @Test
     public void ipFormatCheckPassTest() throws Exception {
-        ipFormatCheck(new BigInteger("0"));
+        ipFormatCheck(0);
     }
 
     @Test(expected = Exception.class)
     public void ipFormatCheckFailTestForNegative() throws Exception {
-        ipFormatCheck(new BigInteger("-1"));
+        ipFormatCheck(-1);
     }
 
     @Test(expected = Exception.class)
     public void ipFormatCheckFailTestForPositive() throws Exception {
-        ipFormatCheck(new BigInteger("4294967296"));
+        ipFormatCheck(4294967296L);
     }
 }

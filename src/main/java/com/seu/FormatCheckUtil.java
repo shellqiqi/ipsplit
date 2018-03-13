@@ -34,8 +34,8 @@ public class FormatCheckUtil {
      * @param ip Unsigned 32 bits integer.
      * @throws Exception When IP is not an unsigned 32bits integer.
      */
-    public static void ipFormatCheck(BigInteger ip) throws Exception {
-        if (ip.compareTo(new BigInteger("0")) < 0 || ip.compareTo(new BigInteger("4294967295")) > 0)
+    public static void ipFormatCheck(long ip) throws Exception {
+        if (ip < 0 || ip > 4294967295L)
             throw new Exception("IP Format Error - IP must be a 32 bits unsigned integer.");
     }
 
