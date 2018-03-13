@@ -21,6 +21,9 @@ public class App {
                 splitList.list.keySet()) {
             IpSegment floorKey = ipList.list.floorKey(splitSegment);
             if (floorKey.contains(splitSegment)) {
+                while (idList.list.containsKey(id) && id < 65535) {
+                    id++;
+                }
                 ipList.split(floorKey, splitSegment, id);
                 idList.list.put(id, splitList.list.get(splitSegment));
                 id++;
