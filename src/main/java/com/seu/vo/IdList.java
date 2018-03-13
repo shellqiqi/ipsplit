@@ -72,6 +72,8 @@ public class IdList {
             fileOutputStream.close();
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            System.out.println("Save ID file to \"" + filePath + '\"');
         }
     }
 }

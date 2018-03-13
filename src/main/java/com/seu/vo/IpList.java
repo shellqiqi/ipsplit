@@ -76,6 +76,8 @@ public class IpList {
             fileOutputStream.close();
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            System.out.println("Save IP file to \"" + filePath + '\"');
         }
     }
 
