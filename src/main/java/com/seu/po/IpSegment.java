@@ -11,32 +11,44 @@ public class IpSegment implements Comparable<IpSegment> {
     private long netBegin;
     private long netEnd;
 
-    public IpSegment(long netBegin, long netEnd) throws Exception {
-        ipFormatCheck(netBegin);
-        ipFormatCheck(netEnd);
-        this.netBegin = netBegin;
-        this.netEnd = netEnd;
-        ipSegmentCheck();
+    public IpSegment(long netBegin, long netEnd) {
+        try {
+            ipFormatCheck(netBegin);
+            ipFormatCheck(netEnd);
+            this.netBegin = netBegin;
+            this.netEnd = netEnd;
+            ipSegmentCheck();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public long getNetBegin() {
         return netBegin;
     }
 
-    public void setNetBegin(long netBegin) throws Exception {
-        ipFormatCheck(netBegin);
-        this.netBegin = netBegin;
-        ipSegmentCheck();
+    public void setNetBegin(long netBegin) {
+        try {
+            ipFormatCheck(netBegin);
+            this.netBegin = netBegin;
+            ipSegmentCheck();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public long getNetEnd() {
         return netEnd;
     }
 
-    public void setNetEnd(long netEnd) throws Exception {
-        ipFormatCheck(netEnd);
-        this.netEnd = netEnd;
-        ipSegmentCheck();
+    public void setNetEnd(long netEnd) {
+        try {
+            ipFormatCheck(netEnd);
+            this.netEnd = netEnd;
+            ipSegmentCheck();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -51,24 +63,36 @@ public class IpSegment implements Comparable<IpSegment> {
     /**
      * Implement of Comparable.
      * @param o Another IP segment.
-     * @return Positive if bigger. Negative if smaller. Zero if equal or cover each other.
+     * @return Only compare beginning.
      */
     public int compareTo(IpSegment o) {
-        if (covers(o)) return 0;
-        else if (netBegin > o.netBegin) return 1;
-        else if (netBegin < o.netBegin) return -1;
-        return 0;
+        return Long.compare(netBegin, o.netBegin);
     }
 
+    /**
+     * Whether IP segment covers each other.
+     * @param o Segment as an operand.
+     * @return True if covered.
+     */
     public boolean covers(IpSegment o) {
         return contains(o) ||
                 !(o.netEnd < netBegin || o.netBegin > netEnd);
     }
 
+    /**
+     * Whether IP segment contains another.
+     * @param o Segment as an operand.
+     * @return True if contains operand.
+     */
     public boolean contains(IpSegment o) {
         return netBegin <= o.netBegin && o.netEnd <= netEnd;
     }
 
+    /**
+     * Whether two segments equal to each other digitally.
+     * @param o Segment as an operand.
+     * @return True if they are equal.
+     */
     public boolean equals(IpSegment o) {
         return netBegin == o.netBegin && o.netEnd == netEnd;
     }

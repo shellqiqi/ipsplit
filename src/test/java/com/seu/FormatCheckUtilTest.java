@@ -2,8 +2,6 @@ package com.seu;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 import static com.seu.FormatCheckUtil.*;
 
 public class FormatCheckUtilTest {

@@ -2,9 +2,7 @@ package com.seu.vo;
 
 import com.seu.po.IpSegment;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.TreeMap;
 
 import static com.seu.FormatCheckUtil.*;
@@ -15,7 +13,7 @@ import static com.seu.FormatCheckUtil.*;
  */
 public class IpList {
 
-    public TreeMap<IpSegment, Integer> list = new TreeMap<IpSegment, Integer>();
+    public TreeMap<IpSegment, Integer> list = new TreeMap<>();
 
     /**
      * Constructor for IP list.
@@ -25,9 +23,11 @@ public class IpList {
         readFromFile(filePath);
     }
 
+    public IpList() {}
+
     /**
-     * Read IP list from file path.
-     * @param filePath File path.
+     * Read IP list from file.
+     * @param filePath Filepath.
      */
     private void readFromFile(String filePath) {
         try {
@@ -56,5 +56,42 @@ public class IpList {
         } finally {
             System.out.println("Read IP file from \"" + filePath + '\"');
         }
+    }
+
+    /**
+     * Save IP list to file.
+     * @param filePath Filepath.
+     */
+    public void saveToFile(String filePath) {
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream(filePath);
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(fileOutputStream));
+
+            for (IpSegment k :
+                    list.keySet()) {
+                writer.write(k.getNetBegin() + "," + k.getNetEnd() + "," + list.get(k) + "\n");
+            }
+
+            writer.close();
+            fileOutputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Split IP list by IP segment.
+     * @param key Target IP segment.
+     * @param split Split IP segment.
+     * @param id ID of split IP segment.
+     */
+    public void split(IpSegment key, IpSegment split, int id) {
+        int oldId = list.get(key);
+        list.remove(key);
+        if (key.getNetBegin() != split.getNetBegin())
+            list.put(new IpSegment(key.getNetBegin(), split.getNetBegin() - 1), oldId);
+        list.put(split, id);
+        if (split.getNetEnd() != key.getNetEnd())
+            list.put(new IpSegment(split.getNetEnd() + 1, key.getNetEnd()), oldId);
     }
 }

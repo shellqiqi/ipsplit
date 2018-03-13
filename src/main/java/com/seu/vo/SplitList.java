@@ -19,6 +19,8 @@ public class SplitList {
         readFromFile(filePath);
     }
 
+    public SplitList() {}
+
     /**
      * Read split list from filepath.
      * @param filePath Filepath.
@@ -45,7 +47,7 @@ public class SplitList {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            System.out.println("Read IP file from \"" + filePath + '\"');
+            System.out.println("Read split file from \"" + filePath + '\"');
         }
     }
 }

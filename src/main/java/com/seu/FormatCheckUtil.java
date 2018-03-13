@@ -1,7 +1,5 @@
 package com.seu;
 
-import java.math.BigInteger;
-
 /**
  * @author <a href="https://github.com/shellqiqi">shellqiqi</a>
  * @since 2018/3/9 13:27

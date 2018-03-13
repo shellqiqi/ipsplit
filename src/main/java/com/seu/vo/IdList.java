@@ -1,9 +1,7 @@
 package com.seu.vo;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
-import java.util.HashMap;
+import java.io.*;
+import java.util.TreeMap;
 
 import static com.seu.FormatCheckUtil.*;
 
@@ -13,7 +11,7 @@ import static com.seu.FormatCheckUtil.*;
  */
 public class IdList {
 
-    public HashMap<Integer, String> list = new HashMap<Integer, String>();
+    public TreeMap<Integer, String> list = new TreeMap<>();
 
     /**
      * Constructor for ID list.
@@ -22,6 +20,8 @@ public class IdList {
     public IdList(String filePath) {
         readFromFile(filePath);
     }
+
+    public IdList() {}
 
     /**
      * Read ID list from filepath.
@@ -51,6 +51,27 @@ public class IdList {
             e.printStackTrace();
         } finally {
             System.out.println("Read ID file from \"" + filePath + '\"');
+        }
+    }
+
+    /**
+     * Save ID list to file.
+     * @param filePath Filepath.
+     */
+    public void saveToFile(String filePath) {
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream(filePath);
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(fileOutputStream));
+
+            for (Integer k :
+                    list.keySet()) {
+                writer.write(k + "," + list.get(k) + "\n");
+            }
+
+            writer.close();
+            fileOutputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
