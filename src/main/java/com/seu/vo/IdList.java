@@ -23,6 +23,14 @@ public class IdList {
 
     public IdList() {}
 
+    public Integer getKey(String value) {
+        for (Integer k :
+                list.keySet()) {
+            if (list.get(k).equals(value)) return k;
+        }
+        return null;
+    }
+
     /**
      * Read ID list from filepath.
      * @param filePath Filepath.

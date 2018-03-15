@@ -1,8 +1,10 @@
 package com.seu.vo;
 
-import com.seu.vo.IdList;
 import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
+
 import static org.junit.Assert.*;
 
 /**
@@ -11,7 +13,11 @@ import static org.junit.Assert.*;
  */
 public class IdListTest {
 
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
+
     @Test
+    @Ignore
     public void readFromFileTest() {
         IdList idList = new IdList("./assets/id.list");
         assertEquals("中国电信", idList.list.get(1));
@@ -25,5 +31,16 @@ public class IdListTest {
         IdList idList = new IdList();
         idList.list.put(1, "hello");
         idList.saveToFile("assets/IdListSaveToFileTest.txt");
+    }
+
+    @Test
+    public void getKeyTest() {
+        IdList idList = new IdList();
+        idList.list.put(1, "hello");
+        idList.list.put(2, "world");
+        idList.list.put(3, "你好");
+        assertEquals(3, idList.getKey("你好").intValue());
+        expectedException.expect(NullPointerException.class);
+        assertNotEquals(2, idList.getKey("or").intValue());
     }
 }

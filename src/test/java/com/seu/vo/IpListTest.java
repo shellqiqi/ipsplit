@@ -13,6 +13,7 @@ import static org.junit.Assert.*;
 public class IpListTest {
 
     @Test
+    @Ignore
     public void readFromFileTest() {
         IpList ipList = new IpList("assets/ip.list");
         assertEquals(16616,
