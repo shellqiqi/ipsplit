@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
 public class IpSegmentTest {
 
     @Rule
-    public ExpectedException expectedException= ExpectedException.none();
+    public ExpectedException expectedException = ExpectedException.none();
 
     @Test
     public void constructorPassTest() {
