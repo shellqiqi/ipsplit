@@ -11,6 +11,10 @@ import com.seu.vo.SplitList;
  */
 public class App {
     public static void main(String[] args) {
+        if (args.length < 3) {
+            System.out.println("Need 3 arguments - ip.list id.list seu.list");
+            return;
+        }
         IpList ipList = new IpList(args[0]);
         IdList idList = new IdList(args[1]);
         SplitList splitList = new SplitList(args[2]);
