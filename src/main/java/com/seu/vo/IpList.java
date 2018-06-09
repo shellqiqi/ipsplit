@@ -32,7 +32,7 @@ public class IpList {
     private void readFromFile(String filePath) {
         try {
             FileInputStream fileInputStream = new FileInputStream(filePath);
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream));
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream, "utf-8"));
 
             String line;
             while ((line = bufferedReader.readLine()) != null) {
@@ -66,12 +66,12 @@ public class IpList {
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(filePath);
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(fileOutputStream));
-
+            StringBuilder builder = new StringBuilder();
             for (IpSegment k :
                     list.keySet()) {
-                writer.write(k.getNetBegin() + "," + k.getNetEnd() + "," + list.get(k) + "\n");
+                builder.append(k.getNetBegin()).append(',').append(k.getNetEnd()).append(',').append(list.get(k)).append('\n');
             }
-
+            writer.write(builder.toString());
             writer.close();
             fileOutputStream.close();
         } catch (Exception e) {

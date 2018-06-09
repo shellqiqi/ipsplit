@@ -30,7 +30,7 @@ public class IdList {
     private void readFromFile(String filePath) {
         try {
             FileInputStream fileInputStream = new FileInputStream(filePath);
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream));
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream, "utf-8"));
 
             String line;
             while ((line = bufferedReader.readLine()) != null) {
@@ -61,13 +61,12 @@ public class IdList {
     public void saveToFile(String filePath) {
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(filePath);
-            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(fileOutputStream));
-
-            for (Integer k :
-                    list.keySet()) {
-                writer.write(k + "," + list.get(k) + "\n");
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(fileOutputStream, "utf-8"));
+            StringBuilder builder = new StringBuilder();
+            for (Integer k : list.keySet()) {
+                builder.append(k).append(',').append(list.get(k)).append('\n');
             }
-
+            writer.write(builder.toString());
             writer.close();
             fileOutputStream.close();
         } catch (Exception e) {

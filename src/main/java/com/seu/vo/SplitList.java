@@ -28,7 +28,7 @@ public class SplitList {
     private void readFromFile(String filePath) {
         try {
             FileInputStream fileInputStream = new FileInputStream(filePath);
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream));
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream, "utf-8"));
 
             String line;
             while ((line = bufferedReader.readLine()) != null) {
